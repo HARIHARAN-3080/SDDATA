@@ -1,0 +1,158 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://www.ksrei.org/wp-content/uploads/2024/05/Book-a-campus-Tour.jpg') no-repeat center center/cover;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    color: #fff;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 120px;
+}
+
+.title {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f0c040;
+}
+
+.category-selection {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.category-selection label {
+    margin-right: 20px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Adjust padding to make space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #f0c040;
+    outline: none;
+    box-shadow: 0 0 5px rgba(240, 192, 64, 0.5);
+}
+
+.toggle-password {
+    position: absolute;
+    right: -290px; /* Adjusted from -300px to be within the visible area */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #f0c040;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(240, 192, 64, 0.5);
+    color: #000;
+}
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.login-link a {
+    color: #f0c040;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.category-specific-fields {
+    display: none; /* Initially hide category-specific fields */
+}
+
+.category-specific-fields .input-group {
+    margin-bottom: 15px; /* Slightly reduced margin for category-specific fields */
+}
+
+.category-selection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.category-selection label input {
+    margin-right: 8px;
+}
+
+.category-selection label {
+    cursor: pointer;
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 15px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .input-group input {
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        font-size: 14px;
+    }
+}

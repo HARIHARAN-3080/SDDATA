@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDDATA</title>
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://www.ksrei.org/wp-content/uploads/2024/05/Book-a-campus-Tour.jpg') no-repeat center center/cover;
+            position: relative; /* Ensure positioning context for fixed elements */
+        }
+
+        /* Header Section */
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .logo .ksr {
+            color: #f0c040;
+        }
+
+        .logo .ce {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .hero-content h2 span {
+            color: #f0c040;
+        }
+
+        .hero-content h3 {
+            font-size: 38px;
+            margin: 0;
+            color: #f0c040;
+        }
+
+        .hero-content h3 span {
+            color: #fff;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-modal h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .login-modal button {
+            padding: 12px 20px;
+            background-color: #f0c040;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .login-modal button:hover {
+            background-color: #d7a936;
+        }
+
+        .category-selection {
+            margin-bottom: 20px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+
+        .category-selection label {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .category-specific-fields {
+            display: none;
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            color: #888;
+        }
+
+        .input-group input {
+            padding-left: 30px;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><span class="ksr">KSR</span><span class="ce">CE</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h2>STUDENTS <span>DATABASE</span></h2>
+            <h3>MAKE AN <span>IMPACT</span></h3>
+            <a href="dept.html" class="btn">DATABASE</a>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <h2>Login</h2>
+            <span class="close" onclick="closeLoginModal()">×</span>
+
+            <!-- Category Selection -->
+            <div class="category-selection">
+                <label><input type="radio" name="category" value="student" onclick="toggleCategoryFields()"> Student</label>
+                <label><input type="radio" name="category" value="faculty" onclick="toggleCategoryFields()"> Faculty</label>
+            </div>
+
+            <!-- Login Fields -->
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email" id="email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" id="login-password" required>
+            </div>
+
+            <!-- Category-specific Fields -->
+            <div id="student-fields" class="category-specific-fields">
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" placeholder="Student ID" id="student-id">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-university"></i>
+                    <input type="text" placeholder="Department" id="student-department">
+                </div>
+            </div>
+
+            <div id="faculty-fields" class="category-specific-fields">
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" placeholder="Faculty ID" id="faculty-id">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <input type="text" placeholder="Department" id="faculty-department">
+                </div>
+            </div>
+
+            <button class="login-btn" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <script>
+        // Open the login modal when the page loads
+        window.onload = function () {
+            document.getElementById("loginModal").style.display = "block";
+        };
+
+        // Close the login modal
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        // Toggle category-specific fields based on user selection
+        function toggleCategoryFields() {
+            const studentFields = document.getElementById('student-fields');
+            const facultyFields = document.getElementById('faculty-fields');
+            const category = document.querySelector('input[name="category"]:checked').value;
+
+            if (category === 'student') {
+                studentFields.style.display = 'block';
+                facultyFields.style.display = 'none';
+            } else if (category === 'faculty') {
+                studentFields.style.display = 'none';
+                facultyFields.style.display = 'block';
+            }
+        }
+
+        // Simple login validation
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("login-password").value;
+
+            if (email && password) {
+                alert("Login successful");
+                closeLoginModal();
+                // Redirect based on user role (Add your logic here)
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://www.ksrei.org/wp-content/uploads/2024/05/Book-a-campus-Tour.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .logo .ksr {
+            color: #f0c040;
+        }
+
+        .logo .ce {
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            margin: 0;
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        nav ul li span {
+            color: #f0c040;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10%;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+            z-index: 1;
+            right: 0;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 70px;
+            width: 900px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            margin-top: 50px;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .profile-img-frame {
+            width: 120px;
+            height: 120px;
+            border: 5px solid #007bff;
+            border-radius: 100%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+        }
+
+        .profile-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-card h2 {
+            text-align: center;
+        }
+
+        /* Profile Information Text */
+        .profile-card p {
+            margin: 10px 0;
+            text-align: justify; /* Justify text for profile information */
+        }
+
+        .profile-card p strong {
+            margin-right: 10px;
+        }
+
+        /* Buttons */
+        .edit-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Popup Form */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .popup-form {
+            margin-top: 40px;
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 30px;
+            padding-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            max-height: 65vh;
+            overflow-y: auto;
+        }
+
+        .popup-form input,
+        .popup-form textarea,
+        .popup-form select {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .popup-form input[type="file"] {
+            padding: 8px;
+        }
+
+        .popup-form button {
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .popup-form .cancel-btn {
+            background: #e74c3c;
+        }
+
+        .popup-form button:disabled {
+            background: #cccccc;
+        }
+
+        #addStudentBtn {
+            display: none;
+        }
+
+        /* Style for the Address Textarea */
+        #studentAddress {
+            resize: vertical;
+            min-height: 50px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Expandable address in profile */
+        #profileAddress {
+            resize: vertical;
+            min-height: 50px;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f1f1f1;
+            text-align: justify; /* Justify address text */
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><span class="ksr">KSR</span><span class="ce">CE</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" aria-label="Portal">Portal</a></li>
+                </ul>
+                <div class="profile-dropdown">
+                    <img src="https://cdn3.iconfinder.com/data/icons/avatars-flat/33/man_5-1024.png" alt="User Profile" class="profile-img" onclick="toggleDropdown()" tabindex="0" aria-label="Profile Dropdown">
+                    <div class="dropdown-content" id="dropdownMenu">
+                        <a href="#" onclick="logout()" aria-label="Logout">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="profile-card">
+            <div class="profile-img-frame">
+                <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile Image">
+            </div>
+            <h2 id="profileName">No Data Found</h2>
+            <p><strong>Email:</strong> <span id="email">-</span></p>
+            <p><strong>Register No:</strong> <span id="registerNo">-</span></p>
+            <p><strong>Mobile:</strong> <span id="mobile">-</span></p>
+            <p><strong>DOB:</strong> <span id="dob">-</span></p>
+            <p><strong>Address:</strong></p>
+            <textarea id="profileAddress" readonly></textarea>
+            <p><strong>Department:</strong> <span id="department">-</span></p>
+            <button class="edit-btn" id="editBtn" onclick="showForm()" aria-label="Edit Details">Edit Details</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup-form" id="popupForm">
+        <h2>Student Details</h2>
+        <form id="studentForm">
+            <input type="text" id="studentName" placeholder="Enter full name" required aria-label="Full Name">
+            <input type="text" id="registerNumber" placeholder="Enter register number" required aria-label="Register Number">
+            <input type="email" id="studentEmail" placeholder="Enter email address" required aria-label="Email">
+            <div class="error-message" id="emailError"></div>
+            <input type="text" id="studentMobile" placeholder="Enter mobile number" required aria-label="Mobile Number">
+            <div class="error-message" id="mobileError"></div>
+            <input type="date" id="studentDOB" required aria-label="Date of Birth">
+            <div class="error-message" id="dobError"></div>
+            <textarea id="studentAddress" placeholder="Enter address" required aria-label="Address"></textarea>
+            <select id="studentDepartment" aria-label="Department">
+                <option value="CSE">Computer Science</option>
+                <option value="ECE">Electronics & Communication</option>
+                <option value="MECH">Mechanical</option>
+                <option value="CIVIL">Civil</option>
+                <option value="EEE">Electrical & Electronics</option>
+            </select>
+            <input type="file" id="profileImageUpload" accept="image/*" aria-label="Profile Image Upload">
+            <div class="error-message" id="imageError"></div>
+            <button type="submit">Submit</button>
+            <button type="button" class="cancel-btn" onclick="closeForm()" aria-label="Cancel">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        window.onload = function() {
+            loadStudentData();
+        };
+
+        function loadStudentData() {
+            const studentData = JSON.parse(localStorage.getItem("studentData"));
+            if (studentData) {
+                displayStudentData(studentData);
+            } else {
+                showForm();
+            }
+        }
+
+        function displayStudentData(studentData) {
+            document.getElementById('profileName').innerText = studentData.name;
+            document.getElementById('email').innerText = studentData.email;
+            document.getElementById('registerNo').innerText = studentData.registerNo;
+            document.getElementById('mobile').innerText = studentData.mobile;
+            document.getElementById('dob').innerText = studentData.dob;
+            document.getElementById('department').innerText = studentData.department;
+            document.getElementById('profileAddress').innerText = studentData.address;
+            document.getElementById('profileImage').src = studentData.profileImage || "https://via.placeholder.com/120";
+        }
+
+        document.getElementById('studentForm').onsubmit = function(event) {
+            event.preventDefault();
+            clearErrors();
+
+            const name = document.getElementById('studentName').value.trim();
+            const registerNo = document.getElementById('registerNumber').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+            const mobile = document.getElementById('studentMobile').value.trim();
+            const dob = document.getElementById('studentDOB').value;
+            const address = document.getElementById('studentAddress').value.trim();
+            const department = document.getElementById('studentDepartment').value;
+            const profileImage = document.getElementById('profileImageUpload').files[0];
+
+            let isValid = true;
+
+            // Email validation
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').innerText = "Invalid email address.";
+                isValid = false;
+            }
+
+            // Mobile validation
+            if (!validateMobile(mobile)) {
+                document.getElementById('mobileError').innerText = "Invalid mobile number.";
+                isValid = false;
+            }
+
+            // Date of Birth validation
+            if (!validateDOB(dob)) {
+                document.getElementById('dobError').innerText = "Invalid date of birth.";
+                isValid = false;
+            }
+
+            // Image validation
+            if (profileImage && !validateImage(profileImage)) {
+                document.getElementById('imageError').innerText = "Image must be less than 2MB and in JPEG/PNG format.";
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            const studentData = {
+                name,
+                registerNo,
+                email,
+                mobile,
+                dob,
+                address,
+                department,
+                profileImage: profileImage ? URL.createObjectURL(profileImage) : null
+            };
+
+            localStorage.setItem("studentData", JSON.stringify(studentData));
+            displayStudentData(studentData);
+            closeForm();
+        };
+
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function validateMobile(mobile) {
+            const regex = /^\d{10}$/;
+            return regex.test(mobile);
+        }
+
+        function validateDOB(dob) {
+            const dobDate = new Date(dob);
+            const today = new Date();
+            return dobDate < today;
+        }
+
+        function validateImage(image) {
+            const validTypes = ["image/jpeg", "image/png"];
+            const maxSize = 2 * 1024 * 1024; // 2MB
+            return validTypes.includes(image.type) && image.size <= maxSize;
+        }
+
+        function clearErrors() {
+            document.getElementById('emailError').innerText = "";
+            document.getElementById('mobileError').innerText = "";
+            document.getElementById('dobError').innerText = "";
+            document.getElementById('imageError').innerText = "";
+        }
+
+        function showForm() {
+            document.getElementById('popupForm').style.display = 'flex';
+            document.getElementById('popupOverlay').style.display = 'block';
+        }
+
+        function closeForm() {
+            document.getElementById('popupForm').style.display = 'none';
+            document.getElementById('popupOverlay').style.display = 'none';
+        }
+
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdownMenu");
+            dropdown.classList.toggle("show");
+        }
+
+        function logout() {
+            alert("Logging out...");
+        }
+
+        // Auto-expand address box for profile view
+        document.getElementById('profileAddress').addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    </script>
+</body>
+</html>

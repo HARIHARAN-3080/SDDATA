@@ -1,0 +1,147 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://www.ksrei.org/wp-content/uploads/2024/05/Book-a-campus-Tour.jpg') no-repeat center center/cover;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    color: #fff;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 120px;
+    max-width: 100%;
+}
+
+.title {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f0c040;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.input-group input:focus {
+    border-color: #f0c040;
+    outline: none;
+    box-shadow: 0 0 5px rgba(240, 192, 64, 0.5);
+}
+
+.toggle-password {
+    position: absolute;
+    right: -290px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #f0c040;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(240, 192, 64, 0.5);
+    color: #000;
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.signup-link a {
+    color: #f0c040;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .login-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .signup-link {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .login-btn {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .signup-link {
+        font-size: 10px;
+    }
+}

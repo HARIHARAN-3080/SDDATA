@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDDATA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modal Styles */
+        .login-modal, .upload-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        .category-selection {
+            margin-bottom: 15px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .category-specific-fields {
+            display: none;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .modal button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><span class="ksr">KSR</span><span class="ce">CE</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h2>STUDENTS <span>DATABASE</span></h2>
+            <h3>MAKE AN <span>IMPACT</span></h3>
+            <button class="btn" onclick="openLoginModal()">DATABASE</button>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <div class="category-selection">
+                <label><input type="radio" name="category" value="student" onclick="toggleCategoryFields()"> Student</label>
+                <label><input type="radio" name="category" value="faculty" onclick="toggleCategoryFields()"> Faculty</label>
+            </div>
+            <input type="email" placeholder="Email" id="email" required>
+            <input type="password" placeholder="Password" id="login-password" required>
+            <div id="student-fields" class="category-specific-fields">
+                <input type="text" placeholder="Student ID" id="student-id">
+                <input type="text" placeholder="Department" id="student-department">
+            </div>
+            <div id="faculty-fields" class="category-specific-fields">
+                <input type="text" placeholder="Faculty ID" id="faculty-id">
+                <input type="text" placeholder="Department" id="faculty-department">
+            </div>
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+
+    <script>
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "flex";
+        }
+
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+       
+        function toggleCategoryFields() {
+            const studentFields = document.getElementById('student-fields');
+            const facultyFields = document.getElementById('faculty-fields');
+            const category = document.querySelector('input[name="category"]:checked')?.value;
+
+            studentFields.style.display = category === 'student' ? 'block' : 'none';
+            facultyFields.style.display = category === 'faculty' ? 'block' : 'none';
+        }
+
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("login-password").value;
+            const category = document.querySelector('input[name="category"]:checked')?.value;
+
+            if (email && password && category) {
+                alert("Login successful");
+                closeLoginModal();
+                setTimeout(() => {
+                    openUploadModal();
+                }, 500);
+            } else {
+                alert("Please fill in all fields and select a category.");
+            }
+        }
+
+        function uploadData() {
+            alert("Data uploaded successfully!");
+            closeUploadModal();
+        }
+    </script>
+</body>
+</html>
